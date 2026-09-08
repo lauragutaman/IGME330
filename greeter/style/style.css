@@ -1,0 +1,26 @@
+    * {
+      background-color: red;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 2rem;
+    }
+
+    /* Declarative styling: the browser applies this at load, before
+       any JS runs. We'll contrast this with JS-driven styling later. */
+    button {
+      width: 100px;
+      height: 50px;
+      font-size: 10pt;
+
+    }
+
+    #greeting {
+      font-size: 1.5rem;
+      background-color: yellow;
+    }
+
+    hr {
+      color: white;
+    }

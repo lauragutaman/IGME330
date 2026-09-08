@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeter</title>
+  <link rel = "stylesheet" href = "style/style.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <!-- button are misaligned  -->
+
+  <button id="hello_button">Say hello</button>
+  <button id="goodbye_button">Say Goodbye</button>
+  <input type="checkbox" id="s" name="ss" />
+  <label for="s">S</label>
+  <hr>
+  <!-- <h1>Greeter</h1> -->
+
+  <!-- Parker is default last name, Peter is default firstname  -->
+
+
+  <input type="text" id="first_name" placeholder="First name">
+  <input type="text" id="last_name" placeholder="Last name">
+
+  <p id="greeting">Waiting for a name...</p>
+
+
+  <script src = "src/greeter.js" defer>
+
+
+
+
+
+
+
+
+
+    // Where Thursday ended: we wired a click listener and saw that
+    // addEventListener stacks while onclick overwrites. Today:
+    //
+    //   1. Grab the elements with document.querySelector()
+    //   2. Wire the click -- addEventListener, NO parens on the handler
+    //   3. Read .value from the inputs, write .textContent to the paragraph
+    //   4. Handle an empty input -- there are FOUR ways, one of them is
+    //      a trap
+    //   5. Meet the debugger: breakpoint, Scope pane, call stack
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+@import url('https://googleapis.com'); 
+
+@media only screen and (min-width: 320px){
+    .container{
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        flex-direction: column;
+    }
+
+    html, body, .container{
+        height: 100%; 
+        margin: 0; 
+    }
+
+    h1{
+        position: sticky;
+        font-size: 2em; 
+        background-color: blue; 
+        color: #f5f5f5; 
+        padding: .8rem; 
+        margin: 0; 
+        text-align: center; 
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    #output{
+        text-align: center; 
+    }
+}
+
+/* Responsive Design for width of 540 px, this is what I changed */
+
+@media only screen and (min-width: 540px){
+    h1{
+        font-size: 2.5rem; 
+        background-color: purple; 
+
+    }
+
+    #output{
+        font-size: 1.5rem;
+    }
+  
+
+}
+
+
+@media only screen and (min-width: 768px){
+    h1{
+        font-size: 3em; 
+        background-color: green; 
+
+    }
+
+    #mybutton{
+        width: 300px; 
+        height: 75pt; 
+        font-size:1.5rem;
+    }
+
+    body{
+        color: darkgray;
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    body{
+        font-size: 1rem; 
+        text-align: left; 
+    }
+
+    h1{
+        background-color: red; 
+
+    }
+
+    .container{
+        display: block; 
+        margin: 1rem; 
+
+    }
+
+    #output{
+        text-align: left;
+    }
+}

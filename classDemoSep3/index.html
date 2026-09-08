@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="first">
+
+    <script>
+        // const first = document.querySelector("#first").value;
+        // // if (first === '') {
+        // //     first = 'Laura';
+        // // }
+
+        // first = first === '' ? "Laura" : first;
+
+        // first = first ? first : "Laura";
+
+        // // default value uses falsey or truthy 
+        // // cleaniest way 
+        // first = first || "Laura";
+
+
+        const values = ["3", "x", "10", " ", "8"];
+        // let result = [];
+        // const result = array.values(result => {
+
+
+        // });
+
+        // basic way of doing this, 
+        // for (let i = 0; i < values.length; i++) {
+        //     const num = parseInt(values[i]);
+
+        //     if (isNaN(num)) {
+        //         continue;  
+        //     } // inversion makes it harder to read can make this more concise in one or two liners 
+        //     result.push(num);
+
+
+        // }
+        // console.log(result); 
+
+        // parameter function, arrow function
+        // processing any array, kind of like a loop, to process an array to do something
+        // half of the time is just to filter data to see what we want to use or see to anaylze 
+        // const result = values.filter(n=> Number(n)); 
+        // console.log(result); 
+
+        // const result = values.filter(n=>{
+        //     let num = parseInt(n); 
+        //     if(isNan(num)){
+        //         return false
+        //     }
+        // })
+
+        // const result = values.filter(n=>{
+        //     !isNan(parseInt(n));
+        //     result = result.map(n=> {
+        //         return Numner(n);
+        //     })
+        // }); 
+
+        let result = values 
+        .filter(n=>{
+        debugger; 
+         !isNaN(parseInt(n)))
+        .map(n=>Number(n)); 
+
+
+        // trick need to see what this does 
+        // let seven = '7'; 
+        // console.log(+seven); 
+
+
+        const age = [50,24,18,13,21]; 
+
+        const collegeAges = age.filter(n=>{
+            return 18 <= n && n <= 23; 
+            
+
+        });
+        
+
+
+    </script>
+
+</body>
+
+</html>
