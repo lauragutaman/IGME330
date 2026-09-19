@@ -1,0 +1,92 @@
+@import url('https://googleapis.com');
+
+/* fiveButton blocked from being displayed */
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body,
+.container {
+    height: 100%;
+    margin: 0;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    text-align: center;
+}
+
+h1 {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0.8rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    background-color: blue;
+    color: var(--text-header);
+}
+
+#output {
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    line-height: 1.6;
+    white-space: pre-line;
+    max-width: 40rem;
+}
+
+button {
+    font-family: inherit;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+
+}
+
+
+#five-Button {
+    display: none;
+}
+
+@media only screen and (min-width: 480px) {
+    h1 {
+        background-color: purple;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+    h1 {
+        background-color: green;
+    }
+
+
+}
+
+@media only screen and (min-width: 1024px) {
+    h1 {
+        background-color: red;
+    }
+
+
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+}
+
+/* Only show the 5-phrase button at 1408px and wider */
+@media only screen and (min-width: 1408px) {
+    #five-Button {
+        display: inline-block;
+    }
+}

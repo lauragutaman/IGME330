@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id ="output_canvas" width = "400px" height = "400px">
+
+
+
+    </canvas>
+    <script>
+
+
+        const canvasElement = document.querySelector('#output_canvas');
+        const ctx = canvasElement.getContext("2d");
+        ctx.fillStyle = 'purple';  
+        ctx.fillRect(10,10,100,100); 
+
+        // Need to make sure cors is enabled so you can make request, you cannot hit an api 
+        // there is a way cors is not enabled 
+        let pokemonList;
+        console.time();
+        fetch('https://pokeapi.co/api/v2/pokemon')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('ppokemne request fail');
+                }
+                return response.json()
+
+            })
+            // promise 
+            .then(data => {
+                // debugger; 
+                console.log(data);
+                return fetch(data.results[0].url);
+                debugger;
+            })
+
+    </script>
+
+</body>
+
+</html>

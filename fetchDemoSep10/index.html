@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="first">
+
+    <script>
+        // POST REQUEST: Sending Data, techincally still get data back 
+        // GET HTTP REQUEST: getting data
+        // Call back function 
+
+        // function reqListener = () =>{
+        //     console.log(this.responseText); 
+        // }
+
+        // const req = new XMLHttpRequest(); 
+        // req.addEventListener("load", reqListener); 
+        // req.
+
+
+        // learn about multithreading
+
+        // fetch('http://www.example.org/example.txt')
+        //     .then(response => {
+        //         return response.text()
+        //     })
+        //     .then(responseText => {
+        //         console.log(responseText);  //this is call back function but nicer and neater 
+        //     }) //promise concepts, scheuduler when this request happen then this request happen then this request happens after 
+
+// know where is the server 
+// where is your netwrok on your browser or termainal 
+// pyysical moving through space 
+
+        fetch('http://129.21.64.160:3000/?name=hellothere')
+            .then(response => {
+                return response.json();
+                console.timeend();
+                debugger; 
+            })
+            .then(data => {
+                console.log(data.fact);
+            });
+
+
+    </script>
+
+</body>
+
+</html>
