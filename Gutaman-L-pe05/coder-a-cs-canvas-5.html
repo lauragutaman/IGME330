@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Screensaver</title>
+    <style>
+        canvas {
+            border: 1px solid gray;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        button {
+            font-size: 1.2em;
+        }
+
+        section {
+            margin: .5em 0 .5em 0;
+        }
+    </style>
+    <script>
+        // #0 - in this class we will always use ECMAScript 5's "strict" mode
+        // See what 'use strict' does here:
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode
+        "use strict";
+
+        // #1 call the `init` function after the pages loads
+        window.onload = init;
+        let ctx;
+        let paused = false;
+        let canvas;
+        let createRectangles = true;
+        let createArcs = true;
+        let createLines = true;
+        let run = false;
+        // let play = true; 
+
+
+
+        function init() {
+            console.log("page loaded!");
+            // #2 Now that the page has loaded, start drawing!
+
+            // A - `canvas` variable points at <canvas> tag
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+
+            // B - the `ctx` variable points at a "2D drawing context"
+
+            // C - all fill operations are now in red
+            ctx.fillStyle = "red";
+
+            // D - fill a rectangle with the current fill color
+            ctx.fillRect(20, 20, 600, 440);
+
+
+
+            // yellow rectange 
+
+            drawRectangle(ctx, 120, 120, 400, 300, "yellow", 20, "magenta");
+
+
+            // lines 
+
+            drawLine(ctx, 20, 20, 640, 460, 8, "yellow");
+            drawLine(ctx, 620, 20, 20, 460, "yellow");
+
+
+
+            drawArc(ctx, 320, 240, 50, "orange", 8, "green", 0, Math.PI * 2);
+            drawArc(ctx, 320, 240, 20, "black", 2, "pink", 0, Math.PI * 2); //this is just pi not sure
+            drawArc(ctx, 300, 220, 10, "black", 2, "pink", 0, Math.Pi * 2);
+            drawArc(ctx,340, 220, 10, "black", 2, "pink", 0, Math.PI * 2);
+
+            drawLine(ctx, 10, 20, 610, 20, 20, "pink");
+
+
+            drawArc(ctx, 100, 100, 50, "red");
+            drawArc(ctx, 100, 100, 50, "green", 10, "pink", 0, Math.PI);
+            drawLine(ctx, 0, 100, 640, 300);
+            drawLine(ctx, 0, 100, 640, 300, 10, "coral");
+
+            setupUI();
+            update();
+            run = true;
+
+
+
+
+
+        }
+
+        function drawRandomRect(ctx) {
+
+            // ctx.fillStyle = getRandomColor();
+            // ctx.strokeStyle = getRandomColor();
+            // ctx.lineWidth = getRandomInt(2, 12);
+
+
+            // ctx.beginPath()
+            // ctx.rect(getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90));
+            // ctx.closePath()
+            // ctx.fill();
+            // ctx.stroke();
+
+            drawRectangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90), getRandomColor(), getRandomInt(2, 12), getRandomColor())
+
+
+        }
+
+        function drawRandomArc(ctx) {
+
+            drawArc(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(0, 20), getRandomColor(), getRandomInt(0, 10), getRandomColor(), getRandomInt(0, 100), getRandomInt(0, 180));
+
+        };
+
+        function drawRandomLine(ctx) {
+            drawLine(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(0, 640), getRandomInt(0, 640), getRandomInt(1, 10), getRandomColor());
+
+        }
+
+        // Event Handlers
+
+        function canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log(mouseX, mouseY);
+
+            for (let i = 0; i < 10; i++) {
+
+                let x = getRandomInt(-100, 100) + mouseX;
+                let y = getRandomInt(-100, 100) + mouseY;
+                let radius = getRandomInt(20, 50);
+                let lineWidth = getRandomInt(0, 10);
+                drawArc(ctx, x, y, radius, lineWidth);
+
+
+            }
+        }
+
+        // canvas helpers
+        // draws rectangles 
+        function drawRectangle(ctx, x, y, width, height, fillStyle = "black", lineWidth = 0, strokeStyle = "black") {
+            console.log("The color of fillstyle:", fillStyle);
+
+            ctx.save();
+            ctx.fillStyle = fillStyle;
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.fill();
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+
+            ctx.closePath();
+            ctx.restore();
+
+
+
+
+        }
+
+
+        // drawing arc params
+
+        function drawArc(ctx, x, y, radius, fillStyle = "black", lineWidth = 0, strokeStyle = "black", startAngle = 0, endAngle = Math.PI * 2
+        ) {
+            ctx.save();
+            ctx.fillStyle = fillStyle;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.fill();
+
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+
+            ctx.closePath();
+            ctx.restore();
+        }
+
+        function drawLine(
+            ctx, x1, y1, x2, y2, lineWidth = 1, strokeStyle = "black") {
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+
+            ctx.restore();
+
+        }
+
+
+
+
+
+        // helpers
+
+        function setupUI() {
+            document.querySelector("#btnPause").onclick = function () {
+                paused = true;
+            };
+
+            document.querySelector("#btnPlay").onclick = function () {
+                paused = false;
+                if (run) return;
+                run = true;
+                update();
+
+                // if statement when play clicks, it goes faster, make it only one loop dont loop again 
+                //go back to the original loop what does that mean 
+                //.save() look into this would help to not increase 
+                //see how this wokrs why it increases
+            };
+
+            document.querySelector("#btnClear").onclick = function () {
+                paused = true;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            }
+
+            canvas.onclick = canvasClicked;
+
+            // rectangle checkbox
+
+            document.querySelector("#cbRectangles").onclick = function (e) {
+                createRectangles = e.target.checked;
+            }
+
+            // arcs checkbox
+
+            document.querySelector("#arcs").onclick = function (e) {
+                createArcs = e.target.checked;
+            }
+
+            // lines checkbox
+
+            document.querySelector("#lines").onclick = function (e) {
+                createLines = e.target.checked;
+            }
+
+
+
+
+        }
+
+        // function drawRandomSemi(ctx) {
+        //     //semi-circle 
+        //     ctx.fillStyle = getRandomColor();
+        //     ctx.strokeStyle = getRandomColor();
+        //     ctx.beginPath();
+        //     ctx.arc(getRandomInt(0, 640), getRandomInt(0, 640), getRandomInt(0, 30), getRandomInt(0, 10), Math.PI, false);
+        //     ctx.closePath();
+        //     ctx.fill();
+        //     ctx.stroke();
+
+        // }
+
+        function update() {
+            if (paused) {
+                run = false;
+                return
+            }
+
+            // drawRandomSemi(ctx);
+            if (createRectangles) drawRandomRect(ctx);
+            if (createArcs) drawRandomArc(ctx);
+            if (createLines) drawRandomLine(ctx);
+            requestAnimationFrame(update);
+
+
+        }
+
+        function getRandomColor() {
+            function getByte() {
+                return 55 + Math.round(Math.random() * 200);
+            }
+            return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+        }
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+    </canvas>
+
+    <section>
+        <button id="btnPlay">Play</button>
+        <button id="btnPause">Pause</button>
+        <button id="btnClear">Clear Screen</button>
+    </section>
+    <section>
+        <span>
+            <input type="checkbox" id="cbRectangles" checked>
+            <label for="cbRectangles">Rectangles</label>
+
+            <input type="checkbox" id="arcs" checked>
+            <label for="arcs">Arcs</label>
+
+            <input type="checkbox" id="lines" checked>
+            <label for="lines">Lines</label>
+        </span>
+    </section>
+    <section>
+        <p>Click on the screen to "spraypaint" rectangles (you probably want the screensaver to be paused)</p>
+    </section>
+</body>
+
+</html>
