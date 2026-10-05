@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas width="500" height="500"></canvas>
+
+    <script>
+
+
+//with {} it mean it just one objecty
+
+        const add = ({a,b}) => {
+            return a+b ;
+        }; 
+
+        //const result = add(1,2);  -- this for 2 objects 
+
+        const result = add ({ 
+            a: 1,
+            b:2
+        });
+
+
+          const add1 = ({a,b =0}) => {
+            return a+b ;
+        }; 
+
+        //const result = add(1,2);  -- this for 2 objects 
+
+        const result1 = add ({ 
+            a: 1
+        }); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Added 'radius' parameter
+        //help function 
+        //not pass in so much parameter make diffuclt to write 
+        // const makeCircle = (ctx, x, y, radius = 20) => {
+        //     ctx.save();
+        //     ctx.beginPath(); 
+        //     ctx.fillStyle = 'pink';
+        //     ctx.strokeStyle = 'pink';
+        //     ctx.arc(x, y, radius, 0, Math.PI * 2);
+        //     ctx.fill();
+        //     ctx.stroke();
+        //     ctx.restore(); 
+        // };
+
+        //example of not making so much parameter 
+        //deconstrcuted syntax 
+        const makeCircle = (ctx, {
+            x: theCircle.x,
+            y: theCircle.y, 
+            r: 30, 
+            fillStyle: 'red', 
+            stroke: 'blue', 
+            lineWidth: 10
+        })
+        
+        const start = performance.now(); 
+        let AnimationCircleRadius = 100; 
+
+        let theCircle = { 
+            x: 250, // Centered on canvas (500x500)
+            y: 250
+        }; 
+
+        const frame = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            
+            let timeElapsed = performance.now() - start;
+            let angle = timeElapsed / 500; 
+
+            let x = theCircle.x + Math.cos(angle) * AnimationCircleRadius;
+            let y = theCircle.y + Math.sin(angle) * AnimationCircleRadius;
+
+            makeCircle(ctx, x, y, 30); 
+
+            // Requests the next frame to create a smooth animation loop
+            requestAnimationFrame(frame);
+        };
+
+        // Start the loop
+        requestAnimationFrame(frame);
+    </script>
+</body>
+</html>
