@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas width="200" height="200"></canvas>
+
+    <script>
+        let canvas = document.querySelector("canvas");
+        let ctx = canvas.getContext("2d");
+
+        const circle = (ctx, location, radius) => {
+            ctx.save();
+            ctx.fillStyle = "pink";
+            ctx.beginPath();
+            ctx.arc(...location, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.restore();
+        };
+
+        // this object, that object is this
+        class Circle {
+            constructor(location, radius, ) {
+                this.location = location;
+                this.radius = radius;
+
+
+
+
+            }
+
+            update(radius){
+                this.radius = radius; 
+
+
+            }
+            draw(ctx) {
+
+                ctx.save(); 
+
+
+            }
+
+
+
+        }
+
+        // data modiftication and date rendering should be seprate in code
+
+
+
+        let circles = [
+            new Circle([200, 100], 2),
+            new Circle(),
+            new Circle()
+        ]
+
+        const frame = (now) => {
+            let now = performance.now(); 
+            let nowS = now/1000; 
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let radius = Math.abs(Math.sin(now / 1000)) * 80;
+
+            circle(ctx, [canvas.width / 2, canvas.height / 2], radius);
+
+            requestAnimationFrame(frame);
+        };
+
+        requestAnimationFrame(frame);
+    </script>
+</body>
+
+</html>

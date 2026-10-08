@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Screensaver</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 1rem; }
+    canvas { max-width: 100%; height: auto; border: 1px solid #ccc; }
+    section { margin: .5rem 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+    button { font-size: 1.1rem; }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="output_canvas" width="640" height="480"></canvas>
+ 
+  <section>
+    <button id="btnPlay">Play</button>
+    <button id="btnPause">Pause</button>
+    <button id="btnClear">Clear</button>
+  </section>
+  <section>
+    <input type="checkbox" id="cbRectangles" checked>
+    <label for="cbRectangles">Rectangles</label>
+  </section>
+  <p>Click the canvas to spray paint.</p>
+
+  <!-- rendering should not have to deal about animinatin, code that depends on time get rough really fast, also rendering should be what you want to look like the end product of 
+   the animation only use request animation, to actually do the moving  -->
+   <!-- translate rotate, biggest difference  -->
+  <script type = "module">
+    "use strict";
+
+    const canvas = document.querySelector('#output_canvas');
+    const ctx = canvas.getContext("2d");
+
+    class rect{
+      constructor(location,size){
+        this.location = location; 
+        this.size = size; 
+      }
+
+      update(now){
+
+      }
+
+      draw(ctx){
+        ctx.save();
+        ctx.fillRect(this.location, this.size, this.size); 
+        ctx.strokeRect(this.location, this.size, this.size); 
+        ctx.restore();
+      }
+    }
+
+    class Square {
+
+    }
+
+    let shapes = [
+      new Sqaure
+    ]
+
+    // Thursday's helpers, as we left them.
+    const rect = (x, y, width, height, lineWidth) => {
+      ctx.save();
+      ctx.fillRect(x, y, width, height);
+      ctx.lineWidth = lineWidth;
+      ctx.strokeRect(x, y, width, height);
+      ctx.restore();
+    };
+
+    const circle = (x, y, radius, color) => {
+      // color = {fill: 'red', stroke: 'green'}
+      ctx.save();
+      ctx.strokeStyle = color.stroke;
+      ctx.fillStyle = color.fill;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    };
+
+    // handy helpers from the C2DES #3 notes
+    const getRandomColor = () => {
+      const getByte = () => 55 + Math.round(Math.random() * 200);
+      return `rgba(${getByte()},${getByte()},${getByte()},.8)`;
+    };
+    const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+    // 1 // drawRandomRect: one random rect, using rect()
+
+    // 2 // update: draw one, then ask for the next frame
+
+    // 3 // paused + Play/Pause buttons. Then: spam Play. Then: the fix.
+
+    // 4 // spray paint: click -> canvas coords -> 10 small rects
+
+    // 5 // drawRectangle(ctx, x, y, w, h, fillStyle, lineWidth, strokeStyle)
+
+    // 6 // createRectangles + checkbox
+
+    // ---- Thursday ----
+    // 7 // drawArc, drawLine on the same pattern
+    // 8 // clearRect at the top of update; a circle that moves and bounces
+    // 9 // ring: two arcs, second counterclockwise
+    // 10 // polygon from a loop; lineJoin, setLineDash
+    // 11 // rounded rect with arcTo
+
+    circle(100, 100, 50, { fill: 'red', stroke: 'green' });
+    rect(50, 50, 25, 25, 2);
+  </script>
+
+</body>
+
+</html>
