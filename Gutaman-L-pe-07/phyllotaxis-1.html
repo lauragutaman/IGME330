@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        "use strict";
+        const canvasWidth = 400, canvasHeight = 300;
+        const fps = 60;
+
+
+        let startC = 4;
+        let startDotRadius = 2;
+        let cGrowth = 0.002;
+        let dotRadiusGrowth = 0.002;
+        let hueDivider = 5;
+
+
+        let ctx;
+        let n = 2;
+        let c = startC;
+        const dotRadius = startDotRadius;
+        let centerX = canvasWidth / 2;
+        let centerY = canvasHeight / 2;
+        let divergence = 137.5;
+        window.onload = init;
+
+
+        const maxFlowerRadius = Math.hypot(canvasWidth, canvasHeight);
+
+        function init() {
+            ctx = canvas.getContext("2d");
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            setUpUI();
+            loop();
+
+
+
+        }
+
+        function loop() {
+
+            // each frame fraws a new dot
+            //a is the angle
+            //r is the radius from center of the flower
+            //c is the "padding" between the dots
+            setTimeout(loop, 1000 / fps);
+            let a = n * dtr(divergence);
+            let r = c * Math.sqrt(n);
+
+            let x = r * Math.cos(a) + centerX;
+            let y = r * Math.sin(a) + centerY;
+
+            let color = `hsl(${n / hueDivider % 361},100%,50%)`;
+            drawCircle(ctx, x, y, dotRadius, color);
+
+
+
+            n++;
+
+            c += cGrowth;
+
+            dotRadius += dotRadiusGrowth;
+
+            if (r > maxFlowerRadius) {
+                clearScreen();
+                resetFlower();
+            }
+
+
+        }
+
+        function resetFlower() {
+            n = 0;
+            c = startC;
+            dotRadius = startDotRadius;
+            clearScreen();
+        }
+
+        function clearScreen() {
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        }
+
+        function setUpUI() {
+
+            const divergenceSelect = document.querySelector("#ctrl-divergence");
+
+            divergenceSelect.onchange = function () {
+                divergence = Number(this.value);
+            };
+
+            document.querySelector("#restartBtn").onclick = function () {
+                clearScreen();
+                resetFlower();
+                centerX = canvasWidth / 2;
+                centerY = canvasHeight / 2;
+                divergence = Number(divergenceSelect.value);
+                console.log("clicked")
+
+
+            };
+
+            document.querySelector("#canvas").onclick = function (e) {
+                centerX = e.offsetX;
+                centerY = e.offsetY;
+                resetFlower();
+            };
+
+
+
+
+        }
+
+
+
+
+
+        // helpers
+        function dtr(degrees) {
+            return degrees * (Math.PI / 180);
+
+        }
+
+        function drawCircle(ctx, x, y, radius, color) {
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+            ctx.restore()
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas">
+    </canvas>
+    <br>
+    <label>Divergence Angle</label>
+    <select id="ctrl-divergence">
+        <option id="1" value="137.1">137.1</option>
+        <option id="2" value="137.3">137.3</option>
+        <option id="3" value="137.5" selected>137.5</option>
+        <option id="4" value="137.7">137.7</option>
+        <option id="5" value="137.9"> 137.9</option>
+    </select>
+    <button id="restartBtn">Restart App </button>
+    <h1>About this app</h1>
+    <ul>
+        <li>The pulldown menu above allows the user to change the divergence angle</li>
+        <li>The "Restart App" button will restore the app to n=1 and to the inital petal size and padding values. The
+            app will use the currently selected divergence angle</li>
+        <li>Changes made from starter code:</li>
+        <ul>
+            <li>Pulldown menu changes the angle of the floret, change happens while the floret is drawing</li>
+            <li>Clicking the canvas starts a new in the spot the user clicks </li>
+            <li>Raised the frame rate to 60 FPS and replaced magic numbers (fps, dot radius, padding, color, speed, and
+                growth rate)</li>
+            <li>Once the flower has completely off the canvas, the screen will automatically restart itself</li>
+        </ul>
+    </ul>
+
+</body>
+
+</html>
